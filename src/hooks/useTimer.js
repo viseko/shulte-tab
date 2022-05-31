@@ -7,6 +7,7 @@ export const useTimer = () => {
   
   const start = () => {
     startTime = Date.now();
+    clear();
     setTime({min: 0, sec: 0});
     setTimer(setInterval(tick, 1000));
   };

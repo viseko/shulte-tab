@@ -36,20 +36,17 @@ const Game = () => {
       buildArray();
       setGameStatus("play");
       setCurrentNumber(1);
-      timer.clear();
-    }
-
-    if (gameStatus === "play") {
       timer.start();
     }
-  }, [gameStatus]);
+  }, [gameStatus, timer]);
 
   useEffect(() => {
     if (currentNumber > 25) {
-      setGameStatus("won");
       timer.stop();
+      setGameStatus("won");
+      setCurrentNumber(1);
     }
-  }, [currentNumber])
+  }, [currentNumber, timer])
 
   return (
     <div className='game'>
@@ -59,8 +56,9 @@ const Game = () => {
         numbers={numbers}
         handleClick={(n) => handleClick(n)}
         handleReplay={replay}
+        time={timer.time}
       />
-      <Timer replay={replay} stop={stopGame} time={timer.time} />
+      <Timer status={gameStatus} replay={replay} stop={stopGame} time={timer.time} />
     </div>
   )
 }

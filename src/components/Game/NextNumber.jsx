@@ -6,4 +6,4 @@ const NextNumber = (props) => {
   )
 }
 
-export default NextNumber
+export default NextNumber;

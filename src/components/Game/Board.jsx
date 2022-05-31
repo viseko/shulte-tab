@@ -12,7 +12,8 @@ const Board = (props) => {
     handleClick,
     handleReplay,
     numbers,
-    status
+    status,
+    time
   } = props;
 
   const clickCell = num => {
@@ -25,6 +26,9 @@ const Board = (props) => {
       {
         (status === "prepare" || status === "won") &&
         <div className='board__overlay'>
+          {status === "won" && (
+            <div>Результат: {time.min} мин, {time.sec} сек</div>
+          )}
           <button className='board__btn' onClick={handleReplay}>
             {status === "prepare" && "Начать игру"}
             {status === "won" && "Заново"}
@@ -32,7 +36,7 @@ const Board = (props) => {
         </div>
       }
     </div>
-  )
-}
+  );
+};
 
-export default Board
+export default Board;
