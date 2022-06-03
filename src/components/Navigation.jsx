@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Navigation = () => {
+const Navigation = (props) => {
   return (
     <nav className='nav'>
+      {props.children}
     </nav>
   )
 }
 
-export default Navigation
+export default Navigation;

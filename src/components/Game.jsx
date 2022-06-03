@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Board from './Game/Board';
 import NextNumber from './Game/NextNumber';
-import shuffle from "../utils/shuffle.js";
+import buildArray from '../utils/buildArray.js';
 import Timer from './Game/Timer';
 import { useTimer } from '../hooks/useTimer';
 
 const Game = () => {
   const [currentNumber, setCurrentNumber] = useState(1);
   const [numbers, setNumbers] = useState([]);
-  const [gameStatus, setGameStatus] = useState("prepare"); // preapare | starting | play | won
+  const [gameStatus, setGameStatus] = useState("prepare"); // prepare | starting | play | won
+  
   const timer = useTimer();
 
   const handleClick = (num) => {
@@ -17,34 +18,35 @@ const Game = () => {
     }
   };
 
-  const buildArray = () => {
-    const arr = shuffle(new Array(25).fill(null).map((n, i) => i + 1));
-    setNumbers(arr);
-  };
-
   const replay = () => {
     setGameStatus("starting");
   };
 
   const stopGame = () => {
     setGameStatus("prepare");
-    timer.stop();
   };
 
   useEffect(() => {
     if (gameStatus === "starting") {
-      buildArray();
-      setGameStatus("play");
       setCurrentNumber(1);
+      setNumbers( buildArray(25, true) );
+      setGameStatus("play");
       timer.start();
+    }
+
+    if (gameStatus === "prepare") {
+      timer.stop();
+    }
+
+    if (gameStatus === "won") {
+      setCurrentNumber(1);
+      timer.stop();
     }
   }, [gameStatus, timer]);
 
   useEffect(() => {
     if (currentNumber > 25) {
-      timer.stop();
       setGameStatus("won");
-      setCurrentNumber(1);
     }
   }, [currentNumber, timer])
 
