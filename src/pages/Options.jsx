@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Navigation from '../components/Navigation';
 import { OptionsContext } from '../context';
 import Button from '../UI/Button';
@@ -24,7 +24,7 @@ const Options = () => {
 
       <div className="options">
         <Number
-          min="5"
+          min="3"
           max="10"
           label="Размер поля"
           value={options.size}

@@ -1,9 +1,11 @@
 .board {
+  --board-size: 5;
+
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 250px;
-  height: 250px;
+  grid-template-columns: repeat(var(--board-size), 1fr);
+  width: calc(var(--board-size) * 50px);
+  height: calc(var(--board-size) * 50px);
   border-bottom: 1px solid #333;
   border-right: 1px solid #333;
 }

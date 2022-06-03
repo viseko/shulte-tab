@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import "../../styles/board.css";
 
 const Cell = ({num, cb}) => {
@@ -13,15 +13,22 @@ const Board = (props) => {
     handleReplay,
     numbers,
     status,
-    time
+    time,
+    size
   } = props;
 
   const clickCell = num => {
     handleClick(num);
   };
 
+  const boardRef = useRef();
+
+  useEffect(() => {
+    boardRef.current.style.setProperty("--board-size", size);
+  }, [size]);
+
   return (
-    <div className='board'>
+    <div className='board' ref={boardRef}>
       { numbers.map(num => <Cell key={num} num={num} cb={clickCell} />) }
       {
         (status === "prepare" || status === "won") &&
