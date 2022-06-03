@@ -18,4 +18,4 @@ const Checkbox = ({label, value, name, cb}) => {
   )
 }
 
-export default Checkbox
+export default Checkbox;

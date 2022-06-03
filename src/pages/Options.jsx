@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Navigation from '../components/Navigation';
+import { OptionsContext } from '../context';
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
 import Number from '../UI/Number';
 import RadioGroup from '../UI/RadioGroup';
 
 const Options = () => {
-  // Временно здесь - потом вынести в контекст
-  const [options, setOptions] = useState({
-    size: 5,
-    order: "up", // up | down | random
-    penalty: false,
-    highlight: false,
-    mix: false
-  });
+  const {options, setOptions} = useContext(OptionsContext);
 
   const changeOptions = (option, value) => {
     const newOptions = {...options};
