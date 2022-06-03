@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
 import Main from './pages/Main';
 import Info from './pages/Info';
 import Options from './pages/Options';
 import Results from './pages/Results';
+import './App.css';
 
 function App() {
   return (

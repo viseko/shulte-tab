@@ -1,0 +1,26 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 10px 11px;
+  margin-bottom: 8px;
+  width: 200px;
+  color: #333;
+  font-size: 20px;
+  text-decoration: none;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background: #eee;
+  transition: 0.2s color background;
+}
+
+.btn:hover {
+  background: #444;
+  color: #eee;
+}
+
+.btn:active {
+  opacity: 0.6;
+}

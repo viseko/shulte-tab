@@ -1,0 +1,27 @@
+.info {
+  font-size: 16px;
+  line-height: 175%;
+}
+
+.info ul {
+  margin: 0;
+  padding: 20px;
+}
+
+.info li {
+  margin-bottom: 1em;
+}
+
+.info li:last-child {
+  margin-bottom: 0;
+}
+
+.info__origin {
+  font-style: italic;
+  text-align: right;
+}
+
+.info__pagination {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,33 @@
+.content-links {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  border: 2px solid #333;
+  border-radius: 10px;
+  user-select: none;
+}
+
+.content-links li {
+  margin: 0;
+}
+
+.content-links__link {
+  width: 100%;
+  padding: 7px;
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  border: 0;
+}
+
+button.content-links__link {
+  cursor: pointer;
+}
+
+.content-links__link--active {
+  background-color: #444;
+  color: #eee;
+}
