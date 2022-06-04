@@ -22,7 +22,7 @@ export const useTimer = () => {
   };
 
   const tick = () => {
-    let diff = new Date(Date.now() - startTime);
+    const diff = new Date(Date.now() - startTime);
 
     setTime({
       min: diff.getMinutes(),

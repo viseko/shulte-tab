@@ -10,15 +10,30 @@ const Game = () => {
   const {options} = useContext(OptionsContext);
   const {size, order, penalty, highlight, mix} = options;
 
-  const [currentNumber, setCurrentNumber] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [steps, setSteps] = useState([0]);
+  const [solvedSteps, setSolvedSteps] = useState([]);
   const [numbers, setNumbers] = useState([]);
   const [gameStatus, setGameStatus] = useState("prepare"); // prepare | starting | play | won
+  const [penaltySeconds, setPenaltySeconds] = useState(0);
+  const [totalTime, setTotalTime] = useState({min: 0, sec: 0});
   
   const timer = useTimer();
 
   const handleClick = (num) => {
-    if (num === currentNumber) {
-      setCurrentNumber(num + 1);
+    const targetStep = steps[currentStep];
+
+    if (num === targetStep) {
+      setCurrentStep(currentStep + 1);
+      setSolvedSteps([...solvedSteps, targetStep]);
+    }
+
+    if (mix) {
+      setNumbers( buildArray(size ** 2, true) );
+    }
+
+    if (num !== targetStep && penalty) {
+      setPenaltySeconds(penaltySeconds + 3);
     }
   };
 
@@ -30,9 +45,20 @@ const Game = () => {
     setGameStatus("prepare");
   };
 
+  const buildSteps = () => {
+    const randomize = (order === "random");
+    const arr = buildArray(size ** 2, randomize);
+    if (order === "down") arr.reverse();
+
+    setSteps(arr);
+  };
+
   useEffect(() => {
     if (gameStatus === "starting") {
-      setCurrentNumber(1);
+      buildSteps();
+      setCurrentStep(0);
+      setPenaltySeconds(0);
+      setSolvedSteps([]);
       setNumbers( buildArray(size ** 2, true) );
       setGameStatus("play");
       timer.start();
@@ -43,29 +69,45 @@ const Game = () => {
     }
 
     if (gameStatus === "won") {
-      setCurrentNumber(1);
+      setCurrentStep(0);
       timer.stop();
     }
-  }, [gameStatus, timer]);
+  }, [gameStatus, timer, size]);
 
   useEffect(() => {
-    if (currentNumber > size ** 2) {
+    if (currentStep === steps.length) {
       setGameStatus("won");
     }
-  }, [currentNumber, timer])
+  }, [currentStep, timer, size])
+
+  useEffect(() => {
+    const date = new Date(
+      timer.time.sec * 1000 +
+      timer.time.min * 1000 * 60 +
+      penaltySeconds * 1000
+    )
+
+    setTotalTime({
+      min: date.getMinutes(),
+      sec: date.getSeconds()
+    })  
+  }, [penaltySeconds, timer.time])
+  
 
   return (
     <div className='game'>
-      <NextNumber number={currentNumber} />
+      <NextNumber number={steps[currentStep]} />
       <Board
         status={gameStatus}
         numbers={numbers}
         handleClick={(n) => handleClick(n)}
         handleReplay={replay}
-        time={timer.time}
+        time={totalTime}
         size={size}
+        highlight={highlight}
+        solved={solvedSteps}
       />
-      <Timer status={gameStatus} replay={replay} stop={stopGame} time={timer.time} />
+      <Timer status={gameStatus} replay={replay} stop={stopGame} time={totalTime} />
     </div>
   )
 }

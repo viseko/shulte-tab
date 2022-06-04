@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import "../../styles/board.css";
 
-const Cell = ({num, cb}) => {
+const Cell = ({num, cb, highlight}) => {
+  const classes = ["board__cell"];
+  if (highlight) classes.push("board__cell--clicked")
+
   return (
-    <button className='board__cell' onClick={() => cb(num)}>{num}</button>
+    <button className={classes.join(" ")} onClick={() => cb(num)}>{num}</button>
   );
 }
 
@@ -14,7 +17,9 @@ const Board = (props) => {
     numbers,
     status,
     time,
-    size
+    size,
+    highlight,
+    solved
   } = props;
 
   const clickCell = num => {
@@ -29,7 +34,7 @@ const Board = (props) => {
 
   return (
     <div className='board' ref={boardRef}>
-      { numbers.map(num => <Cell key={num} num={num} cb={clickCell} />) }
+      { numbers.map(num => <Cell key={num} num={num} highlight={highlight && (solved.includes(num))} cb={clickCell} />) }
       {
         (status === "prepare" || status === "won") &&
         <div className='board__overlay'>
