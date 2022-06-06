@@ -4,6 +4,8 @@
 }
 
 .btn {
+  display: flex;
+  align-items: center;
   padding: 10px 11px;
   margin-bottom: 8px;
   width: 200px;
@@ -23,4 +25,8 @@
 
 .btn:active {
   opacity: 0.6;
+}
+
+.btn svg {
+  margin-right: 10px;
 }

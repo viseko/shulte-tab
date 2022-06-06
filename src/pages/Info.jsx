@@ -5,6 +5,7 @@ import readme, {origin} from '../content/readme.js';
 import "../styles/content-links.css";
 import "../styles/info.css";
 import ContentLinks from '../components/ContentLinks';
+import Icon from '../UI/Icon';
 
 const Info = () => {
   const [currentChapter, setChapter] = useState(0);
@@ -16,7 +17,7 @@ const Info = () => {
   return (
     <div className='page'>
       <Navigation>
-        <Button to="/">К игре</Button>
+        <Button to="/" icon="arrow-left">К игре</Button>
         <ContentLinks data={readme} cb={changePage} currentChapter={currentChapter} />
       </Navigation>
 
@@ -35,15 +36,26 @@ const Info = () => {
             <a href={origin[1]}>{origin[0]}</a>
           }
         </div>
+
         <div className="info__pagination">
-          <button disabled={currentChapter === 0} onClick={() => {setChapter(currentChapter - 1)}}>
-            Пред.
+          <button
+            className="info__pagination-btn"
+            disabled={currentChapter === 0}
+            onClick={() => {setChapter(currentChapter - 1)}}
+          >
+            <Icon width="20" height="20" name="arrow-left" />
           </button>
-          <span>
+
+          <span className="info__pagination-value">
             {currentChapter + 1} / {readme.length}
           </span>
-          <button disabled={currentChapter === readme.length - 1} onClick={() => {setChapter(currentChapter + 1)}}>
-            След.
+
+          <button
+            className="info__pagination-btn"
+            disabled={currentChapter === readme.length - 1}
+            onClick={() => { setChapter(currentChapter + 1) }}
+          >
+            <Icon width="20" height="20" name="arrow-right" />
           </button>
         </div>
       </div>

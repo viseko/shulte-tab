@@ -1,0 +1,34 @@
+.number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.number__label {
+  font-size: 20px;
+  margin-bottom: 17px;
+}
+
+.number__input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number__control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.number__value {
+  padding: 0 10px;
+  font-size: 30px;
+  width: 60px;
+  text-align: center;
+}

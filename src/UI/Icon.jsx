@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Icon = () => {
+const Icon = ({width, height, name}) => {
   return (
-    <div>Icon</div>
+    <svg className='icon' width={width} height={height}>
+      <use xlinkHref={`#${name}`}></use>
+    </svg>
   )
 }
 

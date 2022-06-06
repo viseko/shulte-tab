@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Board from './Game/Board';
-import NextNumber from './Game/NextNumber';
+import GameStatus from './Game/GameStatus';
 import buildArray from '../utils/buildArray.js';
 import Timer from './Game/Timer';
 import { useTimer } from '../hooks/useTimer';
 import { OptionsContext } from '../context';
+
+import "../styles/game.css";
 
 const Game = () => {
   const {options} = useContext(OptionsContext);
@@ -97,13 +99,12 @@ const Game = () => {
 
   return (
     <div className='game'>
-      <NextNumber number={steps[currentStep]} />
+      <GameStatus number={steps[currentStep]} status={gameStatus} time={totalTime} />
       <Board
         status={gameStatus}
         numbers={numbers}
         handleClick={(n) => handleClick(n)}
         handleReplay={replay}
-        time={totalTime}
         size={size}
         highlight={highlight}
         solved={solvedSteps}

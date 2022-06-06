@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import Icon from '../../UI/Icon';
+
 import "../../styles/board.css";
 
 const Cell = ({num, cb, highlight}) => {
@@ -16,7 +18,6 @@ const Board = (props) => {
     handleReplay,
     numbers,
     status,
-    time,
     size,
     highlight,
     solved
@@ -33,16 +34,14 @@ const Board = (props) => {
   }, [size]);
 
   return (
-    <div className='board' ref={boardRef}>
+    <div className='game__board board' ref={boardRef}>
       { numbers.map(num => <Cell key={num} num={num} highlight={highlight && (solved.includes(num))} cb={clickCell} />) }
       {
         (status === "prepare" || status === "won") &&
         <div className='board__overlay'>
-          {status === "won" && (
-            <div>Результат: {time.min} мин, {time.sec} сек</div>
-          )}
           <button className='board__btn' onClick={handleReplay}>
-            {status === "prepare" && "Начать игру"}
+            <Icon width="40" height="40" name="play" />
+            {status === "prepare" && "Старт"}
             {status === "won" && "Заново"}
           </button>
         </div>

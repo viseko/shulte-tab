@@ -7,9 +7,9 @@ const Main = () => {
   return (
     <div className='page'>
       <Navigation>
-        <Button to="info">Об игре</Button>
-        <Button to="options">Опции</Button>
-        <Button to="results">Результаты</Button>
+        <Button to="info" icon="info">Об игре</Button>
+        <Button to="options" icon="settings">Опции</Button>
+        <Button to="results" icon="chart">Результаты</Button>
       </Navigation>
       <Game />
     </div>

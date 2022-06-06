@@ -4,15 +4,17 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(var(--board-size), 1fr);
-  width: calc(var(--board-size) * 50px);
-
-  height: calc(var(--board-size) * 50px);
+  width: 100%;
+  aspect-ratio: 1/1;
+  max-width: calc(var(--board-size) * 70px);
   border-bottom: 1px solid #333;
   border-right: 1px solid #333;
 }
 
 .board__cell {
   aspect-ratio: 1/1;
+  overflow: hidden;
+  font-size: 24px;
   background: none;
   background-color: #eee;
   border: 0;
@@ -54,5 +56,29 @@
 }
 
 .board__btn {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.board__btn svg {
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.board__btn:hover svg {
+  transform: scale(0.9);
+  color: green;
+}
+
+.board__btn:active svg {
+  opacity: 0.6;
 }

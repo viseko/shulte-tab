@@ -6,6 +6,8 @@ import Checkbox from '../UI/Checkbox';
 import Number from '../UI/Number';
 import RadioGroup from '../UI/RadioGroup';
 
+import "../styles/optons.css";
+
 const Options = () => {
   const {options, setOptions} = useContext(OptionsContext);
 
@@ -19,30 +21,32 @@ const Options = () => {
   return (
     <div className='page'>
       <Navigation>
-        <Button to="/">К игре</Button>
+        <Button to="/" icon="arrow-left">К игре</Button>
       </Navigation>
 
       <div className="options">
-        <Number
-          min="3"
-          max="10"
-          label="Размер поля"
-          value={options.size}
-          name="size"
-          cb={changeOptions}
-        />
+        <div className="options__row">
+          <Number
+            min="3"
+            max="10"
+            label="Размер поля"
+            value={options.size}
+            name="size"
+            cb={changeOptions}
+          />
 
-        <RadioGroup
-          value={options.order}
-          name="order"
-          cb={changeOptions}
-          label="Очёрёдность"
-          options={[
-            {value: "up", text: "По возрастанию"},
-            {value: "down", text: "По убыванию"},
-            {value: "random", text: "Хаотично"}
-          ]}
-        />
+          <RadioGroup
+            value={options.order}
+            name="order"
+            cb={changeOptions}
+            label="Очёрёдность"
+            options={[
+              {value: "up", text: "По возрастанию"},
+              {value: "down", text: "По убыванию"},
+              {value: "random", text: "Хаотично"}
+            ]}
+          />
+        </div>
 
         <Checkbox
           label="Штрафное время"

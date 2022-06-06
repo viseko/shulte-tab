@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import Icon from './Icon';
+
+import "../styles/number.css";
 
 const Number = ({min, max, cb, value, label, name}) => {
   const isMax = () => {
@@ -19,11 +22,11 @@ const Number = ({min, max, cb, value, label, name}) => {
       }
       <div className="number__input">
         <button className="number__control" disabled={isMin()} onClick={deсrease}>
-          &lt;
+          <Icon width="20" height="20" name="arrow-left" />
         </button>
         <span className="number__value">{value}</span>
         <button className="number__control" disabled={isMax()} onClick={increase}>
-          &gt;
+          <Icon width="20" height="20" name="arrow-right" />
         </button>
       </div>
     </div>

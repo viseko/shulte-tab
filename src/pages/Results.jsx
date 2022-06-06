@@ -6,8 +6,11 @@ const Results = () => {
   return (
     <div className='page'>
       <Navigation>
-        <Button to="/">К игре</Button>
+        <Button to="/" icon="arrow-left">К игре</Button>
       </Navigation>
+      <div className="info">
+        Функционал в разработке
+      </div>
     </div>
   )
 }
