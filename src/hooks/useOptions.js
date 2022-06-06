@@ -10,7 +10,7 @@ export default function useOptions() {
       const parsedStorageOptions = JSON.parse(storageOptions);
       currentOptions = {...currentOptions, ...parsedStorageOptions};
     } catch {
-      console.error("Ошибка! Неправильная запись опций в LocalStorage.")
+      console.error("Некорректный формат записи опций в Local Storage. Пожалуйста, очистите хранилище для корректной работы приложения.")
     }
   }
 

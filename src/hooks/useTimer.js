@@ -3,7 +3,9 @@ import { useState } from "react";
 export const useTimer = () => {
   const [time, setTime] = useState({min: 0, sec: 0});
   const [timer, setTimer] = useState(0);
-  let startTime = 0;
+  let startTime = 0; // < -- Неким магическим образом геттер из стейта в tick'e всегда равен нулю,
+                     //      а в локальной переменной работает нормально.
+                     //      На данный момент не понял, почему это так работает.
   
   const start = () => {
     startTime = Date.now();
