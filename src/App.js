@@ -5,12 +5,12 @@ import Info from './pages/Info';
 import {OptionsContext} from "./context/index"
 import Options from './pages/Options';
 import Results from './pages/Results';
-import optionsDefault from './config/options';
 import './App.css';
+import useOptions from './hooks/useOptions';
 
 function App() {
   // На данном этапе разработки сразу достаём опции по умолчанию
-  const [options, setOptions] = useState({...optionsDefault});
+  const [options, setOptions] = useOptions();
 
   return (
       <div className="App">

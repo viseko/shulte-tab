@@ -13,11 +13,12 @@ const Game = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [steps, setSteps] = useState([0]);
   const [solvedSteps, setSolvedSteps] = useState([]);
+
   const [numbers, setNumbers] = useState([]);
   const [gameStatus, setGameStatus] = useState("prepare"); // prepare | starting | play | won
+
   const [penaltySeconds, setPenaltySeconds] = useState(0);
   const [totalTime, setTotalTime] = useState({min: 0, sec: 0});
-  
   const timer = useTimer();
 
   const handleClick = (num) => {
