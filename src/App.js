@@ -9,7 +9,6 @@ import './App.css';
 import useOptions from './hooks/useOptions';
 
 function App() {
-  // На данном этапе разработки сразу достаём опции по умолчанию
   const [options, setOptions] = useOptions();
 
   return (
