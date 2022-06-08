@@ -95,7 +95,7 @@ const Game = () => {
   return (
     <div className='game'>
       <GameStatus
-        number={steps.order[steps.current]}
+        number={steps.order[steps.current] || steps.order[steps.current - 1]}
         status={gameStatus}
         time={totalTime}
       />
