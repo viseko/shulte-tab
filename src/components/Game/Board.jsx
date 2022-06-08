@@ -1,16 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import Icon from '../../UI/Icon';
+import Icon from '../UI/Icon';
+import Cell from './Cell';
 
 import "../../styles/board.css";
-
-const Cell = ({num, cb, highlight}) => {
-  const classes = ["board__cell"];
-  if (highlight) classes.push("board__cell--clicked")
-
-  return (
-    <button className={classes.join(" ")} onClick={() => cb(num)}>{num}</button>
-  );
-}
 
 const Board = (props) => {
   const {
@@ -20,12 +12,8 @@ const Board = (props) => {
     status,
     size,
     highlight,
-    solved
+    steps
   } = props;
-
-  const clickCell = num => {
-    handleClick(num);
-  };
 
   const boardRef = useRef();
 
@@ -33,18 +21,33 @@ const Board = (props) => {
     boardRef.current.style.setProperty("--board-size", size);
   }, [size]);
 
+  const solved = steps.order.slice(0, steps.current);
+
+  const checkHighlight = (num) => {
+    return highlight && solved.includes(num);
+  }
+
   return (
     <div className='game__board board' ref={boardRef}>
-      { numbers.map(num => <Cell key={num} num={num} highlight={highlight && (solved.includes(num))} cb={clickCell} />) }
+      {
+        numbers.map(num =>
+          <Cell
+            key={num}
+            num={num}
+            highlight={checkHighlight(num)}
+            cb={handleClick}
+          />
+        )
+      }
+
       {
         (status === "prepare" || status === "won") &&
-        <div className='board__overlay'>
-          <button className='board__btn' onClick={handleReplay}>
-            <Icon width="40" height="40" name="play" />
-            {status === "prepare" && "Старт"}
-            {status === "won" && "Заново"}
-          </button>
-        </div>
+          <div className='board__overlay'>
+            <button className='board__btn' onClick={handleReplay}>
+              <Icon width="40" height="40" name="play" />
+              { {prepare: "Старт", won: "Заново"}[status] }
+            </button>
+          </div>
       }
     </div>
   );

@@ -1,7 +1,8 @@
 import React from 'react';
+
 import Game from '../components/Game';
 import Navigation from '../components/Navigation';
-import Button from '../UI/Button';
+import Button from '../components/UI/Button';
 
 const Main = () => {
   return (
@@ -13,7 +14,7 @@ const Main = () => {
       </Navigation>
       <Game />
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

@@ -1,66 +1,43 @@
 import React, { useState } from 'react';
+
 import Navigation from '../components/Navigation';
-import Button from '../UI/Button';
-import readme, {origin} from '../content/readme.js';
-import "../styles/content-links.css";
-import "../styles/info.css";
 import ContentLinks from '../components/ContentLinks';
-import Icon from '../UI/Icon';
+import Pagination from '../components/Pagination';
+import Button from '../components/UI/Button';
+import readme, {origin} from '../content/readme';
+
+import "../styles/info.css";
 
 const Info = () => {
   const [currentChapter, setChapter] = useState(0);
 
   const changePage = pageNum => {
     setChapter(pageNum);
-  }
+  };
 
   return (
     <div className='page'>
       <Navigation>
-        <Button to="/" icon="arrow-left">К игре</Button>
+        <Button to="/" icon="arrow-left">Назад</Button>
         <ContentLinks data={readme} cb={changePage} currentChapter={currentChapter} />
       </Navigation>
 
       <div className="info">
-        {
-          readme[currentChapter].paragraphs.map((text, i) => <p key={i}>{text}</p>)
-        }
-        {
-          !!readme[currentChapter].list &&
-            <ul>
-              {readme[currentChapter].list.map((text, i) => <li key={i}>{text}</li>)}
-            </ul>
-        }
+        { readme[currentChapter].content }
+        
         <div className="info__origin">
-          Источник: {
-            <a href={origin[1]}>{origin[0]}</a>
-          }
+          Источник: <a href={origin[1]}>{origin[0]}</a>
         </div>
 
-        <div className="info__pagination">
-          <button
-            className="info__pagination-btn"
-            disabled={currentChapter === 0}
-            onClick={() => {setChapter(currentChapter - 1)}}
-          >
-            <Icon width="20" height="20" name="arrow-left" />
-          </button>
-
-          <span className="info__pagination-value">
-            {currentChapter + 1} / {readme.length}
-          </span>
-
-          <button
-            className="info__pagination-btn"
-            disabled={currentChapter === readme.length - 1}
-            onClick={() => { setChapter(currentChapter + 1) }}
-          >
-            <Icon width="20" height="20" name="arrow-right" />
-          </button>
-        </div>
+        <Pagination
+          className="info__pagination"
+          currentPage={currentChapter}
+          changePage={changePage}
+          max={readme.length}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Info
+export default Info;

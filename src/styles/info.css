@@ -23,38 +23,5 @@
 }
 
 .info__pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 30px;
-}
-
-.info__pagination-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  color: #000;
-  border: 2px solid #000;
-  border-radius: 10px;
-  background-color: #eee;
-  cursor: pointer;
-}
-
-.info__pagination-btn:not(:disabled):hover {
-  background-color: #cecece;
-}
-
-.info__pagination-btn:not(:disabled):active {
-  color: rgba(0, 0, 0, 0.6)
-}
-
-.info__pagination-btn:disabled {
-  opacity: 0.3;
-}
-
-.info__pagination-value {
-  padding: 0 20px;
-  font-size: 20px;
 }

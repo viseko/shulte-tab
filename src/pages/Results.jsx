@@ -1,6 +1,7 @@
 import React from 'react';
+
 import Navigation from '../components/Navigation';
-import Button from '../UI/Button';
+import Button from '../components/UI/Button';
 
 const Results = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Board from './Game/Board';
 import GameStatus from './Game/GameStatus';
-import buildArray from '../utils/buildArray.js';
+import buildArray from '../utils/buildArray';
 import Timer from './Game/Timer';
 import { useTimer } from '../hooks/useTimer';
 import { OptionsContext } from '../context';
@@ -9,12 +9,12 @@ import { OptionsContext } from '../context';
 import "../styles/game.css";
 
 const Game = () => {
-  const {options} = useContext(OptionsContext);
-  const {size, order, penalty, highlight, mix} = options;
+  const {size, order, penalty, highlight, mix} = useContext(OptionsContext).options;
 
-  const [currentStep, setCurrentStep] = useState(0);
-  const [steps, setSteps] = useState([0]);
-  const [solvedSteps, setSolvedSteps] = useState([]);
+  const [steps, setSteps] = useState({
+    order: [],
+    current: 0
+  });
 
   const [numbers, setNumbers] = useState([]);
   const [gameStatus, setGameStatus] = useState("prepare"); // prepare | starting | play | won
@@ -24,19 +24,19 @@ const Game = () => {
   const timer = useTimer();
 
   const handleClick = (num) => {
-    const targetStep = steps[currentStep];
+    const targetStep = steps.order[steps.current];
 
     if (num === targetStep) {
-      setCurrentStep(currentStep + 1);
-      setSolvedSteps([...solvedSteps, targetStep]);
+      setSteps({
+        ...steps,
+        current: steps.current + 1
+      })
+    } else if (penalty) {
+      setPenaltySeconds(penaltySeconds + 3);
     }
 
     if (mix) {
       setNumbers( buildArray(size ** 2, true) );
-    }
-
-    if (num !== targetStep && penalty) {
-      setPenaltySeconds(penaltySeconds + 3);
     }
   };
 
@@ -48,40 +48,36 @@ const Game = () => {
     setGameStatus("prepare");
   };
 
-  const buildSteps = () => {
-    const randomize = (order === "random");
-    const arr = buildArray(size ** 2, randomize);
-    if (order === "down") arr.reverse();
-
-    setSteps(arr);
-  };
-
   useEffect(() => {
+    const buildSteps = () => {
+      const randomize = (order === "random");
+      const steps = buildArray(size ** 2, randomize);
+      if (order === "down") steps.reverse();
+  
+      setSteps({
+        order: steps,
+        current: 0
+      });
+    };
+
     if (gameStatus === "starting") {
       buildSteps();
-      setCurrentStep(0);
       setPenaltySeconds(0);
-      setSolvedSteps([]);
       setNumbers( buildArray(size ** 2, true) );
       setGameStatus("play");
       timer.start();
     }
 
-    if (gameStatus === "prepare") {
+    if (gameStatus === "prepare" || gameStatus === "won") {
       timer.stop();
     }
-
-    if (gameStatus === "won") {
-      setCurrentStep(0);
-      timer.stop();
-    }
-  }, [gameStatus, timer, size]);
+  }, [steps, gameStatus, timer, size, order]);
 
   useEffect(() => {
-    if (currentStep === steps.length) {
+    if (steps.current === size ** 2) {
       setGameStatus("won");
     }
-  }, [currentStep, timer, size])
+  }, [steps, size])
 
   useEffect(() => {
     const date = new Date(
@@ -94,24 +90,32 @@ const Game = () => {
       min: date.getMinutes(),
       sec: date.getSeconds()
     })  
-  }, [penaltySeconds, timer.time])
+  }, [penaltySeconds, timer.time]);
   
-
   return (
     <div className='game'>
-      <GameStatus number={steps[currentStep]} status={gameStatus} time={totalTime} />
+      <GameStatus
+        number={steps.order[steps.current]}
+        status={gameStatus}
+        time={totalTime}
+      />
       <Board
         status={gameStatus}
         numbers={numbers}
-        handleClick={(n) => handleClick(n)}
+        handleClick={handleClick}
         handleReplay={replay}
         size={size}
         highlight={highlight}
-        solved={solvedSteps}
+        steps={steps}
       />
-      <Timer status={gameStatus} replay={replay} stop={stopGame} time={totalTime} />
+      <Timer
+        status={gameStatus}
+        replay={replay}
+        stop={stopGame}
+        time={totalTime}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Game
+export default Game;

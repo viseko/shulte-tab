@@ -1,7 +1,7 @@
 import React from 'react';
-import getRandomHash from '../utils/getRandomHash';
+import getRandomHash from '../../utils/getRandomHash';
 
-import "../styles/radio-group.css";
+import "../../styles/radio-group.css";
 import Icon from './Icon';
 
 const RadioGroup = ({value, name, cb, options, label}) => {

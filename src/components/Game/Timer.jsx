@@ -1,7 +1,7 @@
 import React from 'react';
 
 import "../../styles/timer.css";
-import Icon from '../../UI/Icon';
+import Icon from '../UI/Icon';
 
 const Timer = ({time, replay, stop, status}) => {
   return (

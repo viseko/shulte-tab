@@ -1,7 +1,7 @@
 import React from 'react';
-import getRandomHash from '../utils/getRandomHash';
+import getRandomHash from '../../utils/getRandomHash';
 
-import "../styles/checkbox.css";
+import "../../styles/checkbox.css";
 
 const Checkbox = ({label, value, name, cb}) => {
   const id = name + "-" + getRandomHash(4);

@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import "../styles/content-links.css";
 
 const ContentLins = ({data, cb, currentChapter}) => {
   return (

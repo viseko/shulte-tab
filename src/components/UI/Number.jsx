@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from './Icon';
 
-import "../styles/number.css";
+import "../../styles/number.css";
 
 const Number = ({min, max, cb, value, label, name}) => {
   const isMax = () => {

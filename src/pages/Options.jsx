@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import Navigation from '../components/Navigation';
 import { OptionsContext } from '../context';
-import Button from '../UI/Button';
-import Checkbox from '../UI/Checkbox';
-import Number from '../UI/Number';
-import RadioGroup from '../UI/RadioGroup';
 
-import "../styles/optons.css";
+import Navigation from '../components/Navigation';
+import Button from '../components/UI/Button';
+import Checkbox from '../components/UI/Checkbox';
+import Number from '../components/UI/Number';
+import RadioGroup from '../components/UI/RadioGroup';
+
+import "../styles/options.css";
 
 const Options = () => {
   const {options, setOptions} = useContext(OptionsContext);
@@ -21,7 +22,7 @@ const Options = () => {
   return (
     <div className='page'>
       <Navigation>
-        <Button to="/" icon="arrow-left">К игре</Button>
+        <Button to="/" icon="arrow-left">Назад</Button>
       </Navigation>
 
       <div className="options">
