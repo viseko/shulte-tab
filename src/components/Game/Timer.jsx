@@ -9,11 +9,13 @@ const Timer = ({time, replay, stop, status}) => {
       <button className="timer__btn" disabled={status !== "play"} onClick={replay}>
         <Icon width="20" height="20" name="refresh" />
       </button>
+
       <span className="timer__time">
         {time.min}:{time.sec < 10 && "0"}{time.sec}
       </span>
+      
       <button className="timer__btn" disabled={status !== "play"} onClick={stop}>
-      <Icon width="20" height="20" name="stop" />
+        <Icon width="20" height="20" name="stop" />
       </button>
     </div>
   );

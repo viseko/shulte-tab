@@ -7,6 +7,7 @@ import { useTimer } from '../hooks/useTimer';
 import { OptionsContext } from '../context';
 
 import "../styles/game.css";
+import useRecords from '../hooks/useRecords';
 
 const Game = () => {
   const {size, order, penalty, highlight, mix} = useContext(OptionsContext).options;
@@ -22,6 +23,8 @@ const Game = () => {
   const [penaltySeconds, setPenaltySeconds] = useState(0);
   const [totalTime, setTotalTime] = useState({min: 0, sec: 0});
   const timer = useTimer();
+
+  const writeRecord = useRecords().write;
 
   const handleClick = (num) => {
     const targetStep = steps.order[steps.current];
@@ -70,6 +73,20 @@ const Game = () => {
 
     if (gameStatus === "prepare" || gameStatus === "won") {
       timer.stop();
+    }
+
+    if (gameStatus === "won") {
+      const result = {
+        time: totalTime.min * 60 + totalTime.sec,
+        date: Date.now(),
+        size,
+        order,
+        penalty,
+        highlight,
+        mix
+      };
+
+      writeRecord(result);
     }
   }, [steps, gameStatus, timer, size, order]);
 
