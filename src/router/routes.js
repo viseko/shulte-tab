@@ -7,9 +7,9 @@ import Options from '../pages/Options';
 import Results from '../pages/Results';
 
 export const routes = [
-  {path: "/", element: <Main />},
-  {path: "*", element: <Navigate to="/" />},
-  {path: "info", element: <Info />},
-  {path: "options", element: <Options />},
-  {path: "results", element: <Results />},
+  {path: "https://viseko.github.io/shulte-tab", element: <Main />},
+  {path: "https://viseko.github.io/shulte-tab/*", element: <Navigate to="https://viseko.github.io/shulte-tab" />},
+  {path: "https://viseko.github.io/shulte-tab/info", element: <Info />},
+  {path: "https://viseko.github.io/shulte-tab/options", element: <Options />},
+  {path: "https://viseko.github.io/shulte-tab/results", element: <Results />},
 ];

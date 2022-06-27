@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 import Navigation from '../components/Navigation';
+import RecordList from '../components/RecordList';
 import Button from '../components/UI/Button';
 import useRecords from '../hooks/useRecords';
 
@@ -24,18 +25,7 @@ const Results = () => {
       </Navigation>
       <div className="info">
         {
-          loading ? "Идёт загрузка" :
-            <ul>
-              {
-                data.map(record => 
-                  <li key={record.date}>
-                    {record.date} <br />
-                    {record.size}x{record.size} <br />
-                    {record.time} сек
-                  </li>  
-                )
-              }
-            </ul>
+          loading ? "Идёт загрузка" : <RecordList data={data} />
         }
       </div>
     </div>
