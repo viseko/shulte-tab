@@ -8,7 +8,7 @@ import Results from '../pages/Results';
 
 export const routes = [
   {path: "/", element: <Main />},
-  {path: "*", element: <Navigate to="/" />},
+  {path: "*", element: <Navigate to="/"/>},
   {path: "info", element: <Info />},
   {path: "options", element: <Options />},
   {path: "results", element: <Results />},
