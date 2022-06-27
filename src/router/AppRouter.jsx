@@ -5,7 +5,7 @@ import { routes } from './routes';
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}>
       <Routes>
         {
           routes.map(route =>
