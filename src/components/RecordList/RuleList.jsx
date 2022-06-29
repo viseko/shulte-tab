@@ -16,7 +16,7 @@ const RuleList = ({data}) => {
       {mix && <RuleIcon rule="mix" />}
       {highlight && <RuleIcon rule="light" />}
     </ul>
-  )
-}
+  );
+};
 
-export default RuleList
+export default RuleList;

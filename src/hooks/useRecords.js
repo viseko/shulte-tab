@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function useRecords(second) {
   let db = null;
 
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   async function initDB() {
     db = await openDB("resultsDB", 1, {
@@ -29,20 +29,27 @@ export default function useRecords(second) {
     await tx.done;
   };
 
-  const get = async (options = null) => {
+  const getRecords = async (options = null) => {
     setLoading(true);
 
     const db = await initDB();
     const tx = db.transaction("results", "readonly");
     const store = tx.objectStore("results");
+
+    const result = [];
+    let cursor = await store.openCursor(null, "prev");
+    while (cursor) {
+      result.push(cursor.value);
+      cursor = await cursor.continue();
+    }
     
     setLoading(false);
-    return store.getAll();
+    return result;
   };
  
   return {
     write,
-    get,
-    loading
+    getRecords,
+    isLoading
   }
 }

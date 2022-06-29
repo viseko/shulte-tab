@@ -9,10 +9,10 @@ import useRecords from '../hooks/useRecords';
 
 const Results = () => {
   const [data, setData] = useState([]);
-  const {get, loading} = useRecords();
+  const {getRecords, isLoading} = useRecords();
 
   useEffect(() => {
-    const data = get();
+    const data = getRecords();
     data.then(data => {
       setData(data);
     })
@@ -25,7 +25,7 @@ const Results = () => {
       </Navigation>
       <div className="info">
         {
-          loading ? "Идёт загрузка" : <RecordList data={data} />
+          isLoading ? "Идёт загрузка" : <RecordList data={data} />
         }
       </div>
     </div>
