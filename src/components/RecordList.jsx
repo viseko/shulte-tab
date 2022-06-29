@@ -1,22 +1,25 @@
-import React from 'react'
+import React from 'react';
+
+import "../styles/recordlist.css";
+import RuleList from './RecordList/RuleList';
 
 const RecordList = ({data}) => {
   const getDateCell = (ms) => {
     const date = new Date(ms);
     const year = date.getFullYear().toString().slice(2);
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const day = date.getDate();
     const hours = date.getHours();
     const mins = date.getMinutes();
 
     return (
-      <td className='recordlist__time-data'>
-        <span className='recordlist__date'>
+      <td className='recordlist__date'>
+        <span className='recordlist__date-date'>
           {day < 10 && "0"}{day}.
           {month < 10 && "0"}{month}.
           {year}
         </span>
-        <span className="recordlist__time">
+        <span className="recordlist__date-time">
         {hours < 10 && "0"}{hours}:
         {mins < 10 && "0"}{mins}
         </span>
@@ -28,7 +31,10 @@ const RecordList = ({data}) => {
       <tr key={rec.date}>
         { getDateCell(rec.date) }
         <td>{rec.time}</td>
-        <td>{rec.size}</td>
+        <td>{rec.size}x{rec.size}</td>
+        <td>
+          <RuleList data={rec} />
+        </td>
       </tr>
     ))
   };
@@ -39,10 +45,10 @@ const RecordList = ({data}) => {
         <thead>
           <tr>
             <th>Дата</th>
-            <th>Время (сек)</th>
-            <th>Размер поля</th>
-            <th>Доп. опции</th>
-          </tr>
+            <th>Секунд</th>
+            <th>Размер</th>
+            <th>Правила</th>
+          </tr> 
         </thead>
         <tbody>
           { showData() }

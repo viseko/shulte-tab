@@ -1,0 +1,63 @@
+.recordlist {
+  width: 100%;
+}
+
+.recordlist__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.recordlist__table th {
+  height: 45px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #D9D9D9;
+}
+
+.recordlist__table td {
+  height: 45px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.recordlist__date {
+
+}
+
+.recordlist__date-date {
+  display: block;
+}
+
+.recordlist__date-time {
+  display: block;
+  opacity: 0.50;
+  font-size: 12px;
+}
+
+.recordlist__rule-list {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recordlist__rule-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  color: #666;
+}
+
+.recordlist__rule-icon svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.recordlist__rule-icon:last-child {
+  margin-right: 0;
+}
