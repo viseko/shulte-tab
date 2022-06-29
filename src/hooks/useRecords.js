@@ -7,11 +7,12 @@ export default function useRecords(second) {
   const [isLoading, setLoading] = useState(true);
 
   async function initDB() {
-    db = await openDB("resultsDB", 1, {
+    db = await openDB("resultsDB", 3, {
       upgrade(db) {
         if (!db.objectStoreNames.contains("results")) {
           db.createObjectStore("results", {
-            keyPath: "date"
+            keyPath: "id",
+            autoIncrement: true
           })
         }
       }
@@ -30,21 +31,30 @@ export default function useRecords(second) {
   };
 
   const getRecords = async (options = null) => {
-    setLoading(true);
+    // Получаем параметры запроса
+    const {pageSize, currentPage} = options;
 
+    setLoading(true);
+    // Открытие хранилища
     const db = await initDB();
     const tx = db.transaction("results", "readonly");
     const store = tx.objectStore("results");
-
+    // Формирование запроса
+    const count = await store.count();
+    const pages = Math.ceil(count / pageSize);
+    const upper = count - currentPage * pageSize;
+    const lower = upper - pageSize + 1;
+    const request = IDBKeyRange.bound(lower, upper);
+    // Поиск по запросу
     const result = [];
-    let cursor = await store.openCursor(null, "prev");
+    let cursor = await store.openCursor(request, "prev");
     while (cursor) {
       result.push(cursor.value);
       cursor = await cursor.continue();
     }
     
     setLoading(false);
-    return result;
+    return {result, pages};
   };
  
   return {
