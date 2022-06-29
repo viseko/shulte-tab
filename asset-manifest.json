@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/shulte-tab/static/css/main.7c1369f3.css",
-    "main.js": "/shulte-tab/static/js/main.5d56d921.js",
+    "main.css": "/shulte-tab/static/css/main.c2f8f69e.css",
+    "main.js": "/shulte-tab/static/js/main.14a19373.js",
     "index.html": "/shulte-tab/index.html",
-    "main.7c1369f3.css.map": "/shulte-tab/static/css/main.7c1369f3.css.map",
-    "main.5d56d921.js.map": "/shulte-tab/static/js/main.5d56d921.js.map"
+    "main.c2f8f69e.css.map": "/shulte-tab/static/css/main.c2f8f69e.css.map",
+    "main.14a19373.js.map": "/shulte-tab/static/js/main.14a19373.js.map"
   },
   "entrypoints": [
-    "static/css/main.7c1369f3.css",
-    "static/js/main.5d56d921.js"
+    "static/css/main.c2f8f69e.css",
+    "static/js/main.14a19373.js"
   ]
 }
