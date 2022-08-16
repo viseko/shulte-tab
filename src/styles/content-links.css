@@ -31,3 +31,9 @@ button.content-links__link {
   background-color: #444;
   color: #eee;
 }
+
+@media (max-width: 800px) {
+  .content-links {
+    display: none;
+  }
+}

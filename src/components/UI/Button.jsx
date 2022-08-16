@@ -11,7 +11,7 @@ const Button = ({children, to, icon}) => {
         icon && 
         <Icon width={20} height={20} name={icon} />
       }
-      {children}
+      <span>{children}</span>
     </Link>
   )
 }
